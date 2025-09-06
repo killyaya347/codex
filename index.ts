@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { monitor } from './monitor-mmt-range';
 
 monitor().catch((err) => {

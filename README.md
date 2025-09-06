@@ -20,17 +20,25 @@ npm install
 
 ## Configuration
 
-Set the following environment variables:
+Create a `.env` file with the following variables:
 
-- `USER_ADDRESS` – Your Sui wallet address. Used to enumerate LP positions.
-- `TARGET_POSITION_ID` – The Position object ID you want to monitor.
-- `POLL_INTERVAL_SEC` – Optional polling interval in seconds (default: `20`).
+```
+USER_ADDRESS=your_sui_address
+TARGET_POSITION_ID=your_position_id
+POLL_INTERVAL_SEC=20
+TELEGRAM_BOT_TOKEN=telegram_bot_token
+TELEGRAM_CHAT_ID=telegram_chat_id
+```
 
-配置以下环境变量：
+创建 `.env` 文件并配置以下变量：
 
-- `USER_ADDRESS` – 你的 Sui 地址，用于枚举 LP 持仓。
-- `TARGET_POSITION_ID` – 需要监控的 Position 对象 ID。
-- `POLL_INTERVAL_SEC` – 轮询间隔秒（可选，默认 `20`）。
+```
+USER_ADDRESS=你的 Sui 地址
+TARGET_POSITION_ID=需要监控的 Position ID
+POLL_INTERVAL_SEC=20
+TELEGRAM_BOT_TOKEN=Telegram 机器人 token
+TELEGRAM_CHAT_ID=接收提醒的 chat id
+```
 
 ## Run
 
@@ -38,7 +46,7 @@ Set the following environment variables:
 npx ts-node index.ts
 ```
 
-The script will output `in-range` or `out-of-range` each interval. When a position becomes out of range, a `onOutOfRange()` callback is triggered where custom notifications can be integrated.
+The script loads variables from `.env` and will output `in-range` or `out-of-range` each interval. When a position becomes out of range, a Telegram alert is sent.
 
 运行脚本：
 
@@ -46,4 +54,4 @@ The script will output `in-range` or `out-of-range` each interval. When a positi
 npx ts-node index.ts
 ```
 
-脚本会在每次轮询时输出 `in-range` 或 `out-of-range`。当仓位出圈时，会触发 `onOutOfRange()` 回调，可在此接入自定义通知（如 Telegram、Discord、邮件等）。
+脚本会自动读取 `.env` 中的变量，并在每次轮询时输出 `in-range` 或 `out-of-range`。当仓位出圈时，会发送 Telegram 提醒。
